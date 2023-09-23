@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.app {
+    height: 100vh;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("./images/background.png");
+    background-size: cover;
+}
+
+.calculator {
+    height: 40em;
+    width: 30em;
+    max-height: 80%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    background-color: #3d3d3d;
+    border: 0.2em solid #000;
+    box-shadow: 0.3em 0.3em 0.4em #000;
+}
+
+.calculatorScreen {
+    height: 15%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    background-color: #000;
+}
+
+.calculatorScreenOperation {
+    font-size: 1.5em;
+    color: #fff;
+}
+
+.calculatorScreenResult {
+    font-size: 3em;
+    color: #ff7300;
+}
+
+.calculatorButtons {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.5em;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.power {
+    grid-column: 1/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0d793a;
+    border: 0.1em solid #000;
+}
+
+.delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #df2b2b;
+    border: 0.1em solid #000;
+}
+
+.divide, .multiply, .substract, .add, .dot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1f1f1f;
+    border: 0.1em solid #000;
+}
+
+.equal {
+    grid-column: 3/5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2326ec;
+    border: 0.1em solid #000;
+}
+
+.number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #868686;
+    border: 0.1em solid #000;
+}
+
+.divide:hover,
+.multiply:hover,
+.substract:hover,
+.add:hover,
+.dot:hover,
+.equal:hover,
+.delete:hover,
+.power:hover, 
+.number:hover {
+    cursor: pointer;
+    border: 0.2em solid #fff;
+    color: #fff;
+}
+
+@media(max-width: 400px) {
+    .calculatorScreenOperation {
+        font-size: 1.3em;
+    }
+    .calculatorScreenResult{
+        font-size: 2.5em;
+    }
+    .calculatorButtons {
+        font-size: 1.3em;
+    }
+}
