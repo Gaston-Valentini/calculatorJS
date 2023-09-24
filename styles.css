@@ -65,7 +65,7 @@
     border: 0.1em solid #000;
 }
 
-.delete {
+.remove {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -100,7 +100,7 @@
 
 .power:hover,
 .equal:hover,
-.delete:hover,
+.remove:hover,
 .operator:hover,
 .number:hover {
     cursor: pointer;
