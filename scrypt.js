@@ -1,9 +1,12 @@
 let operation = document.querySelector(".calculatorScreenOperation")
 let result = document.querySelector(".calculatorScreenResult")
+
 let power = document.querySelector(".power")
 let numbers = document.querySelectorAll(".number")
 let operators = document.querySelectorAll(".operator")
+let dot = document.querySelector(".dot")
 let remove = document.querySelector(".remove")
+let equal = document.querySelector(".equal")
 
 let onOff = false
 
@@ -17,33 +20,77 @@ power.addEventListener('click', () => {
             operation.innerHTML = ""
         } else {
             operation.innerHTML = 0
+            result.innerHTML = ""
         }
     }
 })
 
-numbers.forEach(number => {number.addEventListener("click", () => {
+numbers.forEach(number => {number.addEventListener("click", (e) => {
     if (onOff) {
-        if (operation.innerHTML == 0) {
-            operation.innerHTML = ""
-            operation.innerHTML += number.innerHTML
+        if (result.innerHTML.length !== 0) {
+            operation.innerHTML = e.target.innerHTML
+            result.innerHTML = ""
         } else {
-            operation.innerHTML += number.innerHTML
+            if (operation.innerHTML === "0") {
+                operation.innerHTML = ""
+                operation.innerHTML += number.innerHTML
+            } else {
+                operation.innerHTML += number.innerHTML
+            }
         }
     }
 })})
 
 operators.forEach(operator => {operator.addEventListener("click", () => {
     if (onOff) {
-        if (!isNaN(operation.innerHTML[operation.innerHTML.length - 1])) {
-            operation.innerHTML += operator.innerHTML
+        if (result.innerHTML.length !== 0) {
+            operation.innerHTML = result.innerHTML + operator.innerHTML
+            result.innerHTML = ""
+        } else {
+            if (!isNaN(operation.innerHTML[operation.innerHTML.length - 1])) {
+                operation.innerHTML += operator.innerHTML
+            }
         }
     }
 })})
 
+dot.addEventListener("click", (e) => {
+    if (onOff) {
+        if (result.innerHTML.length !== 0) {
+            operation.innerHTML = result.innerHTML + e.target.innerHTML
+            result.innerHTML = ""
+        } else {
+            let actualOperation = operation.innerHTML.split(/[+\-*/]/)
+            let containDot = (actualOperation[actualOperation.length - 1].includes("."))
+            if ((!isNaN(operation.innerHTML[operation.innerHTML.length - 1])) && (!containDot)) {
+                operation.innerHTML += e.target.innerHTML
+            }
+        }
+    }
+})
+
 remove.addEventListener("click", () => {
-    if (operation.innerHTML.length == 1) {
+    if (result.innerHTML.length !== 0) {
         operation.innerHTML = 0
+        result.innerHTML = ""
     } else {
-        operation.innerHTML = operation.innerHTML.slice(0, -1)
+        if (operation.innerHTML.length == 1) {
+            operation.innerHTML = 0
+        } else {
+            operation.innerHTML = operation.innerHTML.slice(0, -1)
+        }
+    }
+})
+
+equal.addEventListener("click", () => {
+    let operated = eval(operation.innerHTML)
+    if ((operated != Math.floor(operated)) && (operated.toString().length > 7)) {
+        result.innerHTML = operated.toFixed(7) + "..."
+    } else {
+        if (operated > 1000000000) {
+            result.innerHTML = Number(operated).toExponential()
+        } else {
+            result.innerHTML = operated
+        }
     }
 })
