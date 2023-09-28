@@ -57,8 +57,10 @@ operators.forEach(operator => {operator.addEventListener("click", () => {
 dot.addEventListener("click", (e) => {
     if (onOff) {
         if (result.innerHTML.length !== 0) {
-            operation.innerHTML = result.innerHTML + e.target.innerHTML
-            result.innerHTML = ""
+            if (!result.innerHTML.includes(".")) {
+                operation.innerHTML = result.innerHTML + e.target.innerHTML
+                result.innerHTML = ""
+            }
         } else {
             let actualOperation = operation.innerHTML.split(/[+\-*/]/)
             let containDot = (actualOperation[actualOperation.length - 1].includes("."))
@@ -84,13 +86,6 @@ remove.addEventListener("click", () => {
 
 equal.addEventListener("click", () => {
     let operated = eval(operation.innerHTML)
-    if ((operated != Math.floor(operated)) && (operated.toString().length > 7)) {
-        result.innerHTML = operated.toFixed(7) + "..."
-    } else {
-        if (operated > 1000000000) {
-            result.innerHTML = Number(operated).toExponential()
-        } else {
-            result.innerHTML = operated
-        }
-    }
+    let factor = Math.pow(10, 7)
+    result.innerHTML = Math.round(operated * factor) / factor
 })
