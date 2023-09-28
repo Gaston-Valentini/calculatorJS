@@ -56,7 +56,7 @@ operators.forEach(operator => {operator.addEventListener("click", () => {
 
 dot.addEventListener("click", (e) => {
     if (onOff) {
-        if (result.innerHTML.length !== 0) {
+        if (result.innerHTML.length !== 0 && !result.innerHTML.includes(".")) {
             operation.innerHTML = result.innerHTML + e.target.innerHTML
             result.innerHTML = ""
         } else {
